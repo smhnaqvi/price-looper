@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Loop Calculation Example</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+    }
+    label {
+      margin-right: 10px;
+    }
+    #results p {
+      margin: 4px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <label for="priceValue">Price Value:</label>
+  <input type="number" id="priceValue" value="800" step="0.01">
+
+  <label for="loopCount">Loop Count:</label>
+  <input type="number" id="loopCount" value="3">
+
+  <button id="calculateBtn">Calculate</button>
+
+  <hr>
+
+  <h3>Addition Results</h3>
+  <div id="addResults"></div>
+
+  <h3>Subtraction Results</h3>
+  <div id="subtractResults"></div>
+
+  <script>
+    const calculateBtn = document.getElementById('calculateBtn');
+    const addResultsDiv = document.getElementById('addResults');
+    const subtractResultsDiv = document.getElementById('subtractResults');
+
+    calculateBtn.addEventListener('click', () => {
+      // Clear old results
+      addResultsDiv.innerHTML = '';
+      subtractResultsDiv.innerHTML = '';
+
+      // Read user inputs
+      const priceValue = parseFloat(document.getElementById('priceValue').value);
+      const loopCount = parseInt(document.getElementById('loopCount').value);
+
+      // We'll add/subtract 3/100 for each iteration (example)
+      let currentAdd = priceValue;
+      let currentSubtract = priceValue;
+
+      // Loop as many times as "loopCount"
+      for (let i = 1; i <= loopCount; i++) {
+        // Perform your per-iteration calculation
+        currentAdd += 3/100;
+        currentSubtract -= 3/100;
+
+        // Create a new line of output for each iteration
+        const addP = document.createElement('p');
+        addP.textContent = `Iteration ${i}: ${currentAdd.toFixed(2)}`;
+        addResultsDiv.appendChild(addP);
+
+        const subP = document.createElement('p');
+        subP.textContent = `Iteration ${i}: ${currentSubtract.toFixed(2)}`;
+        subtractResultsDiv.appendChild(subP);
+      }
+    });
+  </script>
+
+</body>
+</html>
